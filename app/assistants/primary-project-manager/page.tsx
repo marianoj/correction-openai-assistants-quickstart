@@ -7,17 +7,10 @@ import ProjectManagerWidget from "../../components/project-manager-widget";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 
 interface ProjectData {
-  taskId?: number;
-  title?: string;
-  description?: string;
-  assignee?: string;
-  status?: string;
-  projectId?: string;
-  updateTime?: string;
-  teamId?: string;
-  date?: string;
-  availableMembers?: string[];
-  unavailableMembers?: string[];
+  summary?: string;
+  tasks?: string[];
+  review?: string;
+  confirmation?: string;
 }
 
 const PrimaryProjectManager = () => {
@@ -31,31 +24,24 @@ const PrimaryProjectManager = () => {
     let data: ProjectData = {};
 
     switch (name) {
-      case "create_task":
-        const { title, description, assignee } = parsedArgs;
+      case "generate_summary":
         data = {
-          taskId: Math.floor(Math.random() * 1000),
-          title,
-          description,
-          assignee,
-          status: "Created",
+          summary: parsedArgs.summary,
         };
         break;
-      case "update_project_status":
-        const { projectId, status } = parsedArgs;
+      case "generate_tasks":
         data = {
-          projectId,
-          status,
-          updateTime: new Date().toISOString(),
+          tasks: parsedArgs.tasks,
         };
         break;
-      case "get_team_availability":
-        const { teamId, date } = parsedArgs;
+      case "review_tasks":
         data = {
-          teamId,
-          date,
-          availableMembers: ["Alice", "Bob", "Charlie"],
-          unavailableMembers: ["David", "Eve"],
+          review: parsedArgs.review,
+        };
+        break;
+      case "confirm_tasks":
+        data = {
+          confirmation: parsedArgs.confirmation,
         };
         break;
       default:

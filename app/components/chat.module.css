@@ -52,6 +52,25 @@
   white-space: pre-wrap;
 }
 
+.messages ul, .messages ol {
+  padding-left: 20px;
+}
+
+.messages li {
+  display: list-item;
+  list-style-position: outside;
+  margin-left: 1em;
+  padding-left: 0.5em;
+}
+
+.messages li::marker {
+  display: inline;
+}
+
+.messages li p {
+  display: inline;
+}
+
 .userMessage,
 .assistantMessage,
 .codeMessage {
