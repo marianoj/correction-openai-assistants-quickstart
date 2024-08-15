@@ -1,0 +1,20 @@
+.widget {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.widget h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.widget ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.widget li {
+  margin-bottom: 8px;
+}
