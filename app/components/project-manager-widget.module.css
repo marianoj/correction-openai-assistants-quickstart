@@ -1,3 +1,9 @@
+.widgetContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .widget {
   background-color: #f0f0f0;
   border-radius: 8px;
@@ -5,16 +11,45 @@
   margin-bottom: 20px;
 }
 
-.widget h2 {
+.widget h2, .widget h3 {
   margin-top: 0;
   color: #333;
+  margin-bottom: 15px;
+}
+
+.widget p {
+  margin: 5px 0;
 }
 
 .widget ul {
   list-style-type: none;
   padding: 0;
+  margin: 10px 0;
 }
 
 .widget li {
   margin-bottom: 8px;
+}
+
+.widget strong {
+  font-weight: bold;
+}
+
+.functionCall {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.functionCall:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.functionCall pre {
+  background-color: #e8e8e8;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.9em;
 }

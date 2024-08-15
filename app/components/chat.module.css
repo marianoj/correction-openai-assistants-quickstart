@@ -50,25 +50,39 @@
   flex-direction: column;
   order: 2;
   white-space: pre-wrap;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.messages h3 {
+  font-weight: 600;
+  margin-bottom: .5rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+  font-size: 1.25em;
+  display: block;
 }
 
 .messages ul, .messages ol {
-  padding-left: 20px;
+  padding-left: 1.5em;
+  margin: 0.5em 0;
 }
 
 .messages li {
   display: list-item;
   list-style-position: outside;
-  margin-left: 1em;
-  padding-left: 0.5em;
+  margin: 0.25em 0;
+  padding-left: 0.25em;
 }
 
 .messages li::marker {
-  display: inline;
+  display: inline-block;
+  margin-right: 0.25em;
 }
 
 .messages li p {
   display: inline;
+  margin: 0;
 }
 
 .userMessage,
