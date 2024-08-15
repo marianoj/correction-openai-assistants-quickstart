@@ -8,28 +8,16 @@ interface ProjectDetails {
   requirements: string;
 }
 
+interface Task {
+  task_id: string;
+  description: string;
+  priority: 'high' | 'medium' | 'low';
+  due_date: string;
+}
+
 interface ProjectData {
   projectDetails?: ProjectDetails;
-  tasks?: {
-    project_summary: string;
-    tasks: string[];
-  };
-  review?: {
-    tasks: {
-      task_id: string;
-      description: string;
-      priority: 'high' | 'medium' | 'low';
-      due_date: string;
-    }[];
-  };
-  confirmation?: {
-    confirmed_tasks: {
-      task_id: string;
-      description: string;
-      priority: 'high' | 'medium' | 'low';
-      due_date: string;
-    }[];
-  };
+  tasks?: Task[];
   projectName?: string;
   projectDescription?: string;
   functionCalls?: { name: string; args: string }[];
@@ -58,38 +46,17 @@ const ProjectDetailsWidget: React.FC<{ details: ProjectDetails }> = ({ details }
   </div>
 );
 
-const TasksWidget: React.FC<{ tasks: { project_summary: string; tasks: string[] } }> = ({ tasks }) => (
+const TasksWidget: React.FC<{ tasks: Task[] }> = ({ tasks }) => (
   <div className={styles.widget}>
-    <h3>Generated Tasks</h3>
-    <p><strong>Project Summary:</strong> {tasks.project_summary}</p>
-    <ul>
-      {tasks.tasks.map((task, index) => (
-        <li key={index}>{task}</li>
-      ))}
-    </ul>
-  </div>
-);
-
-const ReviewWidget: React.FC<{ review: { tasks: { task_id: string; description: string; priority: string; due_date: string; }[] } }> = ({ review }) => (
-  <div className={styles.widget}>
-    <h3>Task Review</h3>
+    <h3>Project Tasks</h3>
     <ol>
-      {review.tasks.map((task) => (
+      {tasks.map((task) => (
         <li key={task.task_id}>
-          <p>{task.description} <em>{task.priority}</em> - {task.due_date}</p>
-        </li>
-      ))}
-    </ol>
-  </div>
-);
-
-const ConfirmationWidget: React.FC<{ confirmation: { confirmed_tasks: { task_id: string; description: string; priority: string; due_date: string; }[] } }> = ({ confirmation }) => (
-  <div className={styles.widget}>
-    <h3>Confirmed Tasks</h3>
-    <ol>
-      {confirmation.confirmed_tasks.map((task) => (
-        <li key={task.task_id}>
-          <p>{task.description} <em>{task.priority}</em> - {task.due_date}</p>
+          <p>
+            <strong>{task.description}</strong>
+            <br />
+            Priority: <em>{task.priority}</em> | Due Date: {task.due_date}
+          </p>
         </li>
       ))}
     </ol>
@@ -117,7 +84,6 @@ const ProjectManagerWidget: React.FC<ProjectManagerWidgetProps> = ({ projectData
           <li>Set project name and description</li>
           <li>Generate project summary</li>
           <li>Create and manage tasks</li>
-          <li>Review and confirm tasks</li>
         </ul>
       </div>
     );
@@ -131,8 +97,6 @@ const ProjectManagerWidget: React.FC<ProjectManagerWidgetProps> = ({ projectData
       )}
       {projectData.projectDetails && <ProjectDetailsWidget details={projectData.projectDetails} />}
       {projectData.tasks && <TasksWidget tasks={projectData.tasks} />}
-      {projectData.review && projectData.review.tasks && projectData.review.tasks.length > 0 && <ReviewWidget review={projectData.review} />}
-      {projectData.confirmation && projectData.confirmation.confirmed_tasks && projectData.confirmation.confirmed_tasks.length > 0 && <ConfirmationWidget confirmation={projectData.confirmation} />}
       {projectData.functionCalls && projectData.functionCalls.length > 0 && (
         <FunctionCallsWidget functionCalls={projectData.functionCalls} />
       )}
